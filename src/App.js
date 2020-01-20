@@ -2,25 +2,35 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+//import components
+
+import Home from "./components/Home"
+import NoMatch from "./components/NoMatch"
+import Character from './components/Character'
+
+// add imports 
+import {Route, Switch} from 'react-router-dom'
+
+
+//add props as an argument
+function App(props) {
+
+  console.log('route',Route)
+ console.log('switch',Switch)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* add Switch notice that the no match component isn't rendering. */}
+      <Switch>
+
+        <Route exact path='/home' render={rProps => <Home {...rProps} /> } />
+        <Route exact path='/:name' render={rProps => <Character {...rProps} /> } />
+        <Route path component={NoMatch} />
+
+      </Switch>
     </div>
   );
 }
 
 export default App;
+
